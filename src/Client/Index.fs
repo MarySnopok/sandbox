@@ -64,23 +64,9 @@ let update (msg: Msg) (model: Model) : Model * Cmd<Msg> =
 
 open Feliz
 open Feliz.Bulma
+open Title
 
-let navBrand =
-    Bulma.navbarBrand.div [
-        Bulma.navbarItem.a [
-            prop.href "https://safe-stack.github.io/"
-            navbarItem.isActive
-            prop.style [
-                style.backgroundColor "lightpink"
-            ]
-            prop.children [
-                Html.img [
-                    prop.src "/heart.png"
-                    prop.alt "logo"
-                ]
-            ]
-        ]
-    ]
+let navBrand = Title.brand
 
 //container with h3 input field for name , buttons to add name and pick animal
 let containerTwoBox  (model: Model) (dispatch: Msg -> unit) =
