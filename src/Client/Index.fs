@@ -1,11 +1,13 @@
 module Index
 
-open System
+open Fable.React
+open Fable.React.Props
+// open System
 // importing these smth to get the Random()
-open System.IO
+// open System.IO
 open Elmish
-open Fable.Remoting.Client
-open Shared
+// open Fable.Remoting.Client
+// open Shared
 
 //adding Animal , Name (User Name) and NameInput state for input to the model
 // type Model =
@@ -15,7 +17,7 @@ open Shared
 //       Name: string
 //       NameInput: string }
 
-type Model = { Value: string }
+type Model = { Sentence: string }
 
 //adding changeAnimal , SetInput Name and SetUserName as option
 // type Msg =
@@ -26,6 +28,10 @@ type Model = { Value: string }
 //     | ChangeAnimal
 //     | SetInputName of string
 //     | SetUserName
+
+type Msg = | Sentense
+
+
 
 
 // let todosApi =
@@ -46,6 +52,8 @@ type Model = { Value: string }
 
 //     model, cmd
 
+let init () = { Sentence = "sentence" }
+
 // possible animals
 // let animals =
 //     [ "Dogs"
@@ -57,6 +65,7 @@ type Model = { Value: string }
 //https://stackoverflow.com/questions/33312260/how-can-i-select-a-random-value-from-a-list-using-f
 // let shuffleR (r: Random) xs = xs |> Seq.sortBy (fun _ -> r.Next())
 
+let update (msg: Msg) (model: Model) = { Sentence = "sentence" }
 
 // let update (msg: Msg) (model: Model) : Model * Cmd<Msg> =
 //     match msg with
@@ -80,25 +89,25 @@ type Model = { Value: string }
 
 // open Feliz
 // open Feliz.Bulma
-open Fable.React
-open Fable.React.Props
+
 
 // open Title
-open Grid
+// open Grid
 
 // let navBrand = Title.brand
-let gridComponent = Grid.grid
+// let gridComponent = Grid.grid
+
 
 let view model dispatch =
     div [ Class "grid" ] [
         span [] [
             str "Hello, "
-            str model.Value
+            str model.Sentence
             str "! "
         ]
         span [] [
             str "How's life, "
-            str model.Value
+            str model.Sentence
             str "?"
         ]
     ]
