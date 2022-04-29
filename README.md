@@ -2,12 +2,12 @@
 
 This template can be used to generate a full-stack web application using the [SAFE Stack](https://safe-stack.github.io/). It was created using the dotnet [SAFE Template](https://safe-stack.github.io/docs/template-overview/). If you want to learn more about the template why not start with the [quick start](https://safe-stack.github.io/docs/quickstart/) guide?
 
-## Install pre-requisites
+## Install prerequisites
 
 You'll need to install the following pre-requisites in order to build SAFE applications
 
-* [.NET Core SDK](https://www.microsoft.com/net/download) 5.0 or higher
-* [Node LTS](https://nodejs.org/en/download/)
+-   [.NET Core SDK](https://www.microsoft.com/net/download) 5.0 or higher
+-   [Node LTS](https://nodejs.org/en/download/)
 
 ## Starting the application
 
@@ -48,6 +48,6 @@ If you want to know more about the full Azure Stack and all of it's components (
 
 You will find more documentation about the used F# components at the following places:
 
-* [Saturn](https://saturnframework.org/)
-* [Fable](https://fable.io/docs/)
-* [Elmish](https://elmish.github.io/elmish/)
+-   [Saturn](https://saturnframework.org/)
+-   [Fable](https://fable.io/docs/)
+-   [Elmish](https://elmish.github.io/elmish/)
