@@ -1,26 +1,17 @@
 .grid
     display: flex
-    justify-content: center
+    justify-content: space-evenly
     align-items: center
-    background-color: goldenrod
     flex-wrap: wrap
-    margin-top: calc(80% - 20px)
-    color: white
-
-.grid-item
-    display: flex
-    justify-self: center
-    align-self: center
-    font-size: 50px
-    width: 50px
+    margin-top: 100px
 
 button
-    color: #eee
+    font-size: 18px
     background-color: white
     border: none
-    border: 1px solid #905f06
+    border: 1px solid #11263f
     border-radius: 4px
-    color: #905f06
+    color: #11263f
     margin: 30px
     text-align: center
     display: block
@@ -28,27 +19,38 @@ button
     justify-content: center
     justify-self: center
     align-self: center
+    padding: 8px
 
-.mini-container,
-.number-container
+
+.picture-container
     display: flex
-    align-items: center
-    justify-content: center
     justify-self: center
     align-self: center
+    flex-direction: column
+    margin-bottom: 10px
+
+.picture
+    display: flex
+    justify-self: center
+    align-self: center
+    margin-right: 10px
     text-align: center
-    margin: 10px
+    width: 20rem
 
-
-.mini-container
+.title
     font-size: 20px
-
-.number-container
-    padding: 0
-    margin: 0
+    margin-top: 10px
+    color: #11263f
 
 
-
+@media (max-width: 678px)
+    button
+        font-size: 14px
+    .title
+        font-size: 14px
+        margin-top: 4px
+    .picture
+        width: 16rem
 
 
 
