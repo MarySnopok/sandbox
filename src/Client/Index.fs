@@ -5,17 +5,27 @@ open Elmish
 //https://thomasbandt.com/model-view-update?
 //https://zaid-ajaj.github.io/the-elmish-book/#/chapters/fable/
 // type of single item
+
+// TODO JP project is growing, so let's separate into files (probably:
+// - Model (with the data model, Item and Model and our Messages
+// - State (with the update function)
+// - View (with the view function and all the components)
+
 type Item =
     { Title: string
       ImageUrl: string
       Link: string }
 
 //type of state
+// TODO JP for paging we'll have to add Current page in the model.
 type Model =
     { Items: Item [] }
     static member Empty = { Items = [||] }
 
 //list of possible actions
+// TODO JP for paging we'll have to have messages that will trigger the page change, and messages that will load the data for each page
+// will there be only numbers? Then we need something like ChangeToPage (pageNumber: int)
+// will we have Previous and NextPage? Then we'll need these messages
 type Msg =
     | LoadItems
     | ItemsLoaded of Item []
@@ -24,6 +34,8 @@ type Msg =
 let init () : Model * Cmd<Msg> = Model.Empty, Cmd.none
 
 //imulate api call
+// TODO JP let's still just fake it
+// The fake API call needs to accept requested page number, and the response should include not only the loaded items, but also some indication of the total number of items/pages
 let loadItems _ =
     [| { Title = "Special offer on all Dewalt tools."
          ImageUrl =
@@ -41,8 +53,8 @@ let loadItems _ =
 //update state based on Msg
 let update (msg: Msg) model =
     match msg with
-    | LoadItems -> model, Cmd.OfFunc.perform loadItems () ItemsLoaded
-    | ItemsLoaded items -> { model with Items = items }, Cmd.none
+    | LoadItems -> model, Cmd.OfFunc.perform loadItems () ItemsLoaded // TODO JP here we'll have to replace the unit ( () ) with the page number
+    | ItemsLoaded items -> { model with Items = items }, Cmd.none // TODO JP and here we'll have to handle the new payload, that will contain the max limit of items/pages
 
 
 
