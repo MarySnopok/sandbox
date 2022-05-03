@@ -67,7 +67,18 @@ let view (model: Model) dispatch =
         button [ OnClick(fun _ -> dispatch LoadItems) ] [
             str "Load Items"
         ]
-        div [ Class "grid" ] (model.Items |> Array.map itemView)
+        match model.Items with
+        | [||] ->
+            div [ Class "placeholder-message" ] [str "Press button to load more"]
+        | items ->
+            div [ Class "grid" ] (items |> Array.map itemView)
+
+        //if model.Items = [||]
+        //then
+        //    div [ Class "placeholder-message" ]  [str "Press button to load more"]
+        //else
+        //    div [ Class "grid" ] (model.Items |> Array.map itemView)
+
 
     // ul [ Class "grid" ] [
     //     li [ Class "list-item" ] [
