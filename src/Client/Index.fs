@@ -8,7 +8,12 @@ open Elmish
 type Item =
     { Title: string
       ImageUrl: string
-      Link: string }
+      Link: string
+      Price: string
+      Dimentions: string
+      Availability: string
+      Cart: string
+    }
 
 //type of state
 type Model =
@@ -28,15 +33,40 @@ let loadItems _ =
     [| { Title = "Special offer on all Dewalt tools."
          ImageUrl =
            "https://images.prismic.io/proffsmagasinet-se/d288febc-500a-41b9-9e13-0a85e58a7f63_dewalt_se_960x960.png?auto=compress,format&rect=0,0,960,960&w=924&h=924"
-         Link = "http://www.google.com/search?q=lemon" }
+         Link = "http://www.google.com/search?q=lemon"
+         Price = "1200kr"
+         Dimentions = "30 cm ; 35 cm ; 45 cm"
+         Availability = "10 items"
+         Cart = ""
+         }
        { Title = "Special offer on all Dewalt tools."
          ImageUrl =
            "https://images.prismic.io/proffsmagasinet-se/d288febc-500a-41b9-9e13-0a85e58a7f63_dewalt_se_960x960.png?auto=compress,format&rect=0,0,960,960&w=924&h=924"
-         Link = "http://www.google.com/search?q=lime" }
+         Link = "http://www.google.com/search?q=orange"
+         Price = "1200kr"
+         Dimentions = $"30 cm ; 35 cm ; 45 cm"
+         Availability = "10 items"
+         Cart = ""
+        }
        { Title = "Special offer on all Dewalt tools."
          ImageUrl =
            "https://images.prismic.io/proffsmagasinet-se/d288febc-500a-41b9-9e13-0a85e58a7f63_dewalt_se_960x960.png?auto=compress,format&rect=0,0,960,960&w=924&h=924"
-         Link = "http://www.google.com/search?q=love" } |]
+         Link = "http://www.google.com/search?q=lime"
+         Price = "1200kr"
+         Dimentions = "30 cm ; 35 cm ; 45 cm"
+         Availability = "10 items"
+         Cart = ""
+        }
+       { Title = "Special offer on all Dewalt tools."
+         ImageUrl =
+           "https://images.prismic.io/proffsmagasinet-se/d288febc-500a-41b9-9e13-0a85e58a7f63_dewalt_se_960x960.png?auto=compress,format&rect=0,0,960,960&w=924&h=924"
+         Link = "http://www.google.com/search?q=love"
+         Price = "1200kr"
+         Dimentions = "30 cm ; 35 cm ; 45 cm"
+         Availability = "10 items"
+         Cart = ""
+         }
+         |]
 
 //update state based on Msg
 let update (msg: Msg) model =
@@ -44,10 +74,24 @@ let update (msg: Msg) model =
     | LoadItems -> model, Cmd.OfFunc.perform loadItems () ItemsLoaded
     | ItemsLoaded items -> { model with Items = items }, Cmd.none
 
-
-
 open Fable.React
 open Fable.React.Props
+
+let itemDetails (item: Item) =
+    div [ Class "details-container" ] [
+         span [ Class "product-details" ] [
+                str item.Price
+            ]
+         span [ Class "product-details" ] [
+                str item.Dimentions
+            ]
+         span [ Class "product-details" ] [
+                str item.Availability
+            ]
+         span [ Class "product-cart" ] [
+                str item.Cart
+            ]
+    ]
 
 let itemView (item: Item) =
     div [ Class "picture-container" ] [
@@ -72,47 +116,15 @@ let view (model: Model) dispatch =
             div [ Class "placeholder-message" ] [str "Press button to load more"]
         | items ->
             div [ Class "grid" ] (items |> Array.map itemView)
-
+            div [ Class "extra-details-wrapper" ] (items |> Array.map itemDetails)
         //if model.Items = [||]
         //then
         //    div [ Class "placeholder-message" ]  [str "Press button to load more"]
         //else
         //    div [ Class "grid" ] (model.Items |> Array.map itemView)
 
-
-    // ul [ Class "grid" ] [
-    //     li [ Class "list-item" ] [
-    //         a [ Class "link-to-product" ] [
-    //             div [ Class "picture-container" ] [
-    //             // img [
-    //             //     Class "picture"
-
-
-    //             // ]
-    //             ]
-    //             h1 [ Class "list-item-heading" ] [
-    //                 str "Special offer on all Dewalt tools."
-    //             ]
-    //         ]
-    //     ]
-    //     li [ Class "list-item" ] [
-    //         a [ Class "link-to-product" ] [
-    //             div [ Class "picture-container" ] [
-    //             // img [
-    //             //     Class "picture"
-
-
-    //             // ]
-    //             ]
-    //             h1 [ Class "list-item-heading" ] [
-    //                 str "Special offer on all Dewalt tools."
-    //             ]
-    //         ]
-    //     ]
-    // ]
     ]
-
-
+    
 
 // let view model dispatch =
 

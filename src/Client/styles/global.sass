@@ -1,6 +1,10 @@
+html,body
+    color: #11263f
+    width: 100%
+
 .grid
     display: flex
-    justify-content: space-evenly
+    justify-content: space-around
     align-items: center
     flex-wrap: wrap
     margin-top: 100px
@@ -11,7 +15,6 @@ button
     border: none
     border: 1px solid #11263f
     border-radius: 4px
-    color: #11263f
     margin: 30px
     text-align: center
     display: block
@@ -20,7 +23,6 @@ button
     justify-self: center
     align-self: center
     padding: 8px
-
 
 .picture-container
     display: flex
@@ -40,10 +42,16 @@ button
 .title
     font-size: 20px
     margin-top: 10px
-    color: #11263f
 
+.placeholder-message
+    font-size: 20px
+    padding: 8px
+    margin-left: 22px
 
-@media (max-width: 678px)
+.product-cart
+    content: "\f07b"
+
+@media (max-width: 767px)
     button
         font-size: 14px
     .title
@@ -51,6 +59,9 @@ button
         margin-top: 4px
     .picture
         width: 16rem
+    .placeholder-message
+        font-size: 14px
+
 
 
 
