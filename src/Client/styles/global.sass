@@ -1,8 +1,18 @@
-html,body
-    color: #11263f
-    width: 100%
+$primary: black
+$secondary: pink
+$highlight: orangerod
+$fontColor: #11263f
+$lightGrey: lightgrey
+$borderColor: #11263f6e
+$grey: grey
+$background: #eee
 
-.grid
+html,body
+    color: $fontColor
+    width: 100%
+    background-color: $background
+
+.product-items-wrapper
     display: flex
     justify-content: space-around
     align-items: center
@@ -13,7 +23,7 @@ button
     font-size: 18px
     background-color: white
     border: none
-    border: 1px solid #11263f
+    border: 1px solid $fontColor
     border-radius: 4px
     margin: 30px
     text-align: center
@@ -30,26 +40,45 @@ button
     align-self: center
     flex-direction: column
     margin-bottom: 10px
-
-.picture
-    display: flex
-    justify-self: center
-    align-self: center
-    margin-right: 10px
-    text-align: center
-    width: 20rem
-
-.title
-    font-size: 20px
-    margin-top: 10px
+    .picture
+         display: flex
+         justify-self: center
+         align-self: center
+         margin-right: 10px
+         text-align: center
+         width: 20rem
+    .title
+        font-size: 18px
+        margin-top: 10px
 
 .placeholder-message
     font-size: 20px
     padding: 8px
     margin-left: 22px
 
-.product-cart
-    content: "\f07b"
+.details-wrapper
+    display: flex
+    justify-content: flex-start
+    align-items: stretch
+    flex-direction: column
+    flex-wrap: nowrap
+    width: 100%
+    margin: 50px 0 50px 0
+    .details-container
+        display: flex
+        align-items: center
+        justify-content: space-around
+        background-color: $secondary
+        justify-self: center
+        font-size: 18px
+        padding: 6px
+        text-align: center
+        margin-top: 8px
+        border-bottom: 2px solid $borderColor
+    .product-details
+        padding: 4px
+
+
 
 @media (max-width: 767px)
     button

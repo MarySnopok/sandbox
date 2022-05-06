@@ -1,6 +1,10 @@
 module Index
 
 open Elmish
+open Fable.React
+open Fable.React.Props
+open Fable.Core
+open Browser
 
 //https://thomasbandt.com/model-view-update?
 //https://zaid-ajaj.github.io/the-elmish-book/#/chapters/fable/
@@ -12,7 +16,7 @@ type Item =
       Price: string
       Dimentions: string
       Availability: string
-      Cart: string
+      Cart: int
     }
 
 //type of state
@@ -24,99 +28,103 @@ type Model =
 type Msg =
     | LoadItems
     | ItemsLoaded of Item []
+    | Log of Item []
 
 //initiate default state
 let init () : Model * Cmd<Msg> = Model.Empty, Cmd.none
+let log (banana: string ) =
+    console.log(banana)
+log "Hello it is a string" 
 
 //imulate api call
 let loadItems _ =
-    [| { Title = "Special offer on all Dewalt tools."
+    [| { Title = "Special screws for wood and concrete."
          ImageUrl =
            "https://images.prismic.io/proffsmagasinet-se/d288febc-500a-41b9-9e13-0a85e58a7f63_dewalt_se_960x960.png?auto=compress,format&rect=0,0,960,960&w=924&h=924"
          Link = "http://www.google.com/search?q=lemon"
-         Price = "1200kr"
-         Dimentions = "30 cm ; 35 cm ; 45 cm"
-         Availability = "10 items"
-         Cart = ""
+         Price = "300 kr"
+         Dimentions = "20 cm  15 cm  15 cm"
+         Availability = "4-7 items"
+         Cart = 10
          }
-       { Title = "Special offer on all Dewalt tools."
+       { Title = "Drill and line tool on offer."
          ImageUrl =
            "https://images.prismic.io/proffsmagasinet-se/d288febc-500a-41b9-9e13-0a85e58a7f63_dewalt_se_960x960.png?auto=compress,format&rect=0,0,960,960&w=924&h=924"
          Link = "http://www.google.com/search?q=orange"
-         Price = "1200kr"
-         Dimentions = $"30 cm ; 35 cm ; 45 cm"
-         Availability = "10 items"
-         Cart = ""
+         Price = "1400 kr"
+         Dimentions = $"30 cm  35 cm  45 cm"
+         Availability = "3-6 items"
+         Cart = 10
         }
-       { Title = "Special offer on all Dewalt tools."
+       { Title = "Dewalt tools on a limited time offer."
          ImageUrl =
            "https://images.prismic.io/proffsmagasinet-se/d288febc-500a-41b9-9e13-0a85e58a7f63_dewalt_se_960x960.png?auto=compress,format&rect=0,0,960,960&w=924&h=924"
          Link = "http://www.google.com/search?q=lime"
-         Price = "1200kr"
-         Dimentions = "30 cm ; 35 cm ; 45 cm"
-         Availability = "10 items"
-         Cart = ""
+         Price = "2000 kr"
+         Dimentions = "50 cm  35 cm  45 cm"
+         Availability = "2-9 items"
+         Cart = 10
         }
-       { Title = "Special offer on all Dewalt tools."
+       { Title = "Variety of tools of offer.Special price."
          ImageUrl =
            "https://images.prismic.io/proffsmagasinet-se/d288febc-500a-41b9-9e13-0a85e58a7f63_dewalt_se_960x960.png?auto=compress,format&rect=0,0,960,960&w=924&h=924"
          Link = "http://www.google.com/search?q=love"
-         Price = "1200kr"
-         Dimentions = "30 cm ; 35 cm ; 45 cm"
-         Availability = "10 items"
-         Cart = ""
+         Price = "800 kr"
+         Dimentions = "30 cm  35 cm  45 cm"
+         Availability = "7-9 items"
+         Cart = 10
          }
          |]
 
 //update state based on Msg
 let update (msg: Msg) model =
     match msg with
-    | LoadItems -> model, Cmd.OfFunc.perform loadItems () ItemsLoaded
-    | ItemsLoaded items -> { model with Items = items }, Cmd.none
+    | LoadItems -> model, Cmd.OfFunc.perform loadItems () ItemsLoaded 
+    | ItemsLoaded items -> { model with Items = items }, Cmd.ofMsg ( Log items )
+    | Log items ->
+        for i in 0 .. items.Length - 1 do
+            log $"We have {items.[i].Title}"
+        { model with Items = items }, Cmd.none
 
-open Fable.React
-open Fable.React.Props
 
 let itemDetails (item: Item) =
     div [ Class "details-container" ] [
-         span [ Class "product-details" ] [
-                str item.Price
-            ]
-         span [ Class "product-details" ] [
-                str item.Dimentions
-            ]
-         span [ Class "product-details" ] [
-                str item.Availability
-            ]
-         span [ Class "product-cart" ] [
-                str item.Cart
-            ]
+         span [ Class "product-details" ] [ str item.Price ]
+         span [ Class "product-details" ] [ str item.Dimentions ]
+         span [ Class "product-details" ] [ str item.Availability ]
+         span [ Class "product-details" ] [ str (string item.Cart) ]
     ]
 
 let itemView (item: Item) =
     div [ Class "picture-container" ] [
-        a [ Href item.Link ] [
+        a [ Href item.Link
+            Target "blank,noopener,noreferrer"
+          ] [
             img [
                 Class "picture"
                 Src item.ImageUrl
             ]
-            span [ Class "title" ] [
-                str item.Title
-            ]
+            span [ Class "title" ] [ str item.Title ]
         ]
     ]
 
 let view (model: Model) dispatch =
     div [] [
-        button [ OnClick(fun _ -> dispatch LoadItems) ] [
-            str "Load Items"
-        ]
+        button [ OnClick(fun _ -> dispatch LoadItems) ] [ str "Load Items" ]
         match model.Items with
         | [||] ->
             div [ Class "placeholder-message" ] [str "Press button to load more"]
         | items ->
-            div [ Class "grid" ] (items |> Array.map itemView)
-            div [ Class "extra-details-wrapper" ] (items |> Array.map itemDetails)
+            div [ Class "product-items-wrapper" ] (items |> Array.map itemView)
+            div [ Class "details-wrapper" ] [
+            div [ Class "details-container" ] [
+                span [ Class "product-details" ] [ str "Price"]
+                span [ Class "product-details" ] [ str "Dimentions"]
+                span [ Class "product-details" ] [ str "Items left"]
+                span [ Class "product-details" ] [ str "Product code"]
+                ]
+            ]
+            div [ Class "details-wrapper" ] (items |> Array.map itemDetails)
         //if model.Items = [||]
         //then
         //    div [ Class "placeholder-message" ]  [str "Press button to load more"]
@@ -146,3 +154,4 @@ let view (model: Model) dispatch =
 //             ]
 //         ]
 //     ]
+
