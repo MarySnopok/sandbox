@@ -12,7 +12,6 @@ open Browser
 type Item =
     { Title: string
       ImageUrl: string
-      Link: string
       Price: string
       Dimentions: string
       Availability: string
@@ -41,7 +40,6 @@ let loadItems _ =
     [| { Title = "Special screws for wood and concrete."
          ImageUrl =
            "https://images.prismic.io/proffsmagasinet-se/d288febc-500a-41b9-9e13-0a85e58a7f63_dewalt_se_960x960.png?auto=compress,format&rect=0,0,960,960&w=924&h=924"
-         Link = "http://www.google.com/search?q=lemon"
          Price = "300 kr"
          Dimentions = "20 cm  15 cm  15 cm"
          Availability = "4-7 items"
@@ -50,7 +48,6 @@ let loadItems _ =
        { Title = "Drill and line tool on offer."
          ImageUrl =
            "https://images.prismic.io/proffsmagasinet-se/d288febc-500a-41b9-9e13-0a85e58a7f63_dewalt_se_960x960.png?auto=compress,format&rect=0,0,960,960&w=924&h=924"
-         Link = "http://www.google.com/search?q=orange"
          Price = "1400 kr"
          Dimentions = $"30 cm  35 cm  45 cm"
          Availability = "3-6 items"
@@ -59,7 +56,6 @@ let loadItems _ =
        { Title = "Dewalt tools on a limited time offer."
          ImageUrl =
            "https://images.prismic.io/proffsmagasinet-se/d288febc-500a-41b9-9e13-0a85e58a7f63_dewalt_se_960x960.png?auto=compress,format&rect=0,0,960,960&w=924&h=924"
-         Link = "http://www.google.com/search?q=lime"
          Price = "2000 kr"
          Dimentions = "50 cm  35 cm  45 cm"
          Availability = "2-9 items"
@@ -68,7 +64,6 @@ let loadItems _ =
        { Title = "Variety of tools of offer. Special price."
          ImageUrl =
            "https://images.prismic.io/proffsmagasinet-se/d288febc-500a-41b9-9e13-0a85e58a7f63_dewalt_se_960x960.png?auto=compress,format&rect=0,0,960,960&w=924&h=924"
-         Link = "http://www.google.com/search?q=love"
          Price = "800 kr"
          Dimentions = "30 cm  35 cm  45 cm"
          Availability = "7-9 items"
@@ -97,9 +92,7 @@ let itemDetails (item: Item) =
 
 let itemView (item: Item) =
     div [ Class "picture-container" ] [
-        a [ Href item.Link
-            Target "blank,noopener,noreferrer"
-          ] [
+        div [ OnClick(fun _ -> log "smth smth smth ") ] [
             img [
                 Class "picture"
                 Src item.ImageUrl
@@ -110,7 +103,7 @@ let itemView (item: Item) =
 
 let view (model: Model) dispatch =
     div [] [
-        button [ OnClick(fun _ -> dispatch LoadItems) ] [ str "Load Items" ]
+        button [ OnClick(fun _ -> dispatch LoadItems) ] [ str "Lololo" ]
         match model.Items with
         | [||] ->
             div [ Class "placeholder-message" ] [str "Press button to load more"]
