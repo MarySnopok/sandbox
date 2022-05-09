@@ -18,10 +18,20 @@ type Item =
       Cart: int
     }
 
+type Popup =
+    { Title: string }
+
 //type of state
 type Model =
-    { Items: Item [] }
-    static member Empty = { Items = [||] }
+    {
+      Items: Item []
+      Popup: Popup
+    }
+    static member Empty =
+        {
+            Items = [||]
+            Popup = false
+        }
 
 //list of possible actions
 type Msg =
@@ -80,6 +90,7 @@ let update (msg: Msg) model =
         for i in 0 .. items.Length - 1 do
             log $"We have {items.[i].Title}"
         { model with Items = items }, Cmd.none
+    
 
 
 let itemDetails (item: Item) =
@@ -92,7 +103,7 @@ let itemDetails (item: Item) =
 
 let itemView (item: Item) =
     div [ Class "picture-container" ] [
-        div [ OnClick(fun _ -> log "smth smth smth ") ] [
+        div [ OnClick(fun _ -> window.alert("Dont press on me!")) ] [
             img [
                 Class "picture"
                 Src item.ImageUrl
@@ -118,6 +129,7 @@ let view (model: Model) dispatch =
                 ]
             ]
             div [ Class "details-wrapper" ] (items |> Array.map itemDetails)
+            div [ Class "details-wrapper" ] [ str "Something New"]
         //if model.Items = [||]
         //then
         //    div [ Class "placeholder-message" ]  [str "Press button to load more"]
