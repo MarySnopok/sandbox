@@ -3,8 +3,12 @@ module App
 open Elmish
 open Elmish.React
 open Fable.Core.JsInterop
+open Elmish.HMR
+
+
 
 importSideEffects "./styles/global.sass"
+
 
 #if DEBUG
 open Elmish.Debug

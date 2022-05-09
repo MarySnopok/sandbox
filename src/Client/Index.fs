@@ -2,11 +2,15 @@ module Client
 
 open Fulma
 open Elmish
+open Browser
 open Elmish.React
 open Fable.React
 open Fable.React.Props
 open Fable.Core.JsInterop
 open Elmish.Navigation
+
+open Title 
+
 
 module HomePage =
     type Model = { Title : string }
@@ -110,7 +114,7 @@ let view (model : Model) (dispatch : Msg -> unit) =
     div [] [
         Navbar.navbar [ Navbar.Color IsPrimary ] [
             Navbar.Item.div [ ] [
-                Heading.h1 [ ] [ str "Elmish navigation example" ]
+                Heading.h1 [ ] [ str "Type your name" ]
             ]
         ]
 
@@ -122,7 +126,7 @@ let view (model : Model) (dispatch : Msg -> unit) =
                         Label.label [] [ str "Name" ]
                         Input.text [
                             Input.Value model.NameEntry
-                            Input.Placeholder "Enter Name Here..."
+                            Input.Placeholder "enter name here..."
                             Input.Props [ OnChange (fun ev -> dispatch (PersonNameChanged !!ev.target?value)) ]
                         ]
                     ]
