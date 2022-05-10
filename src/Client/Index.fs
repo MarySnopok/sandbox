@@ -18,9 +18,6 @@ type Item =
       Cart: int
     }
 
-type Popup =
-    { Popup: bool }
-
 //type of state
 type Model =
     {
@@ -38,17 +35,14 @@ type Msg =
     | LoadItems
     | ItemsLoaded of Item []
     | Log of Item []
-    | Popup of bool
+    | TogglePopup
+   // | HidePopup
 
 //initiate default state
 let init () : Model * Cmd<Msg> = Model.Empty, Cmd.none
 let log (banana: string ) =
     console.log(banana)
 log "Hello it is a string"
-
-//let popupSwitch bool =
-    //if true
-    //then 
 
 //imulate api call
 let loadItems _ =
@@ -89,7 +83,7 @@ let loadItems _ =
 //update state based on Msg
 let update (msg: Msg) model =
     match msg with
-    | PopupSwitch -> model, Cmd.OfFunc.perform 
+    | TogglePopup -> {model with Popup = not model.Popup}, Cmd.none
     | LoadItems -> model, Cmd.OfFunc.perform loadItems () ItemsLoaded 
     | ItemsLoaded items -> { model with Items = items }, Cmd.ofMsg ( Log items )
     | Log items ->
@@ -97,7 +91,7 @@ let update (msg: Msg) model =
             log $"We have {items.[i].Title}"
         { model with Items = items }, Cmd.none
     
-
+    //    | HidePopup -> {model with Popup = false}, Cmd.none
 
 let itemDetails (item: Item) =
     div [ Class "details-container" ] [
@@ -118,6 +112,7 @@ let itemView (item: Item) =
         ]
     ]
 
+
 let view (model: Model) dispatch =
     div [] [
         button [ OnClick(fun _ -> dispatch LoadItems) ] [ str "Lololo" ]
@@ -127,13 +122,17 @@ let view (model: Model) dispatch =
         | items ->
             div [ Class "product-items-wrapper" ] (items |> Array.map itemView)
             div [ Class "details-wrapper" ] [
-            div [ Class "details-container" ] [
-                span [ Class "product-details" ] [ str "Price"]
-                span [ Class "product-details" ] [ str "Dimentions"]
-                span [ Class "product-details" ] [ str "Items left"]
-                span [ Class "product-details" ] [ str "Product code"]
+            button [ OnClick(fun _ -> dispatch TogglePopup) ] [ str "view details" ]
+            if model.Popup
+            then
+                div [ Class "details-container" ] [
+                    span [ Class "product-details" ] [ str "Price"]
+                    span [ Class "product-details" ] [ str "Dimentions"]
+                    span [ Class "product-details" ] [ str "Items left"]
+                    span [ Class "product-details" ] [ str "Product code"]
+                    ]
                 ]
-            ]
+
             div [ Class "details-wrapper" ] (items |> Array.map itemDetails)
             div [ Class "details-wrapper" ] [ str "Something New"]
         //if model.Items = [||]
