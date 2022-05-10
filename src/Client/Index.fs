@@ -19,13 +19,13 @@ type Item =
     }
 
 type Popup =
-    { Title: string }
+    { Popup: bool }
 
 //type of state
 type Model =
     {
       Items: Item []
-      Popup: Popup
+      Popup: bool
     }
     static member Empty =
         {
@@ -38,12 +38,17 @@ type Msg =
     | LoadItems
     | ItemsLoaded of Item []
     | Log of Item []
+    | Popup of bool
 
 //initiate default state
 let init () : Model * Cmd<Msg> = Model.Empty, Cmd.none
 let log (banana: string ) =
     console.log(banana)
-log "Hello it is a string" 
+log "Hello it is a string"
+
+//let popupSwitch bool =
+    //if true
+    //then 
 
 //imulate api call
 let loadItems _ =
@@ -84,6 +89,7 @@ let loadItems _ =
 //update state based on Msg
 let update (msg: Msg) model =
     match msg with
+    | PopupSwitch -> model, Cmd.OfFunc.perform 
     | LoadItems -> model, Cmd.OfFunc.perform loadItems () ItemsLoaded 
     | ItemsLoaded items -> { model with Items = items }, Cmd.ofMsg ( Log items )
     | Log items ->
