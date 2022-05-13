@@ -121,25 +121,24 @@ let view (model: Model) dispatch =
             div [ Class "placeholder-message" ] [str "Press button to load more"]
         | items ->
             div [ Class "product-items-wrapper" ] (items |> Array.map itemView)
-            div [ Class "details-wrapper" ] [
             button [ OnClick(fun _ -> dispatch TogglePopup) ] [ str "view details" ]
             if model.Popup
             then
+                div [ Class "details-wrapper" ] [
                 div [ Class "details-container" ] [
-                    span [ Class "product-details" ] [ str "Price"]
-                    span [ Class "product-details" ] [ str "Dimentions"]
-                    span [ Class "product-details" ] [ str "Items left"]
-                    span [ Class "product-details" ] [ str "Product code"]
+                    span [ Class "product-description" ] [ str "Price"]
+                    span [ Class "product-description" ] [ str "Dimentions"]
+                    span [ Class "product-description" ] [ str "Items left"]
+                    span [ Class "product-description" ] [ str "Product code"]
                     ]
                 ]
+                div [ Class "details-wrapper" ] (items |> Array.map itemDetails)
 
-            div [ Class "details-wrapper" ] (items |> Array.map itemDetails)
-            div [ Class "details-wrapper" ] [ str "Something New"]
-        //if model.Items = [||]
+    ]
+
+
+            //if model.Items = [||]
         //then
         //    div [ Class "placeholder-message" ]  [str "Press button to load more"]
         //else
         //    div [ Class "grid" ] (model.Items |> Array.map itemView)
-
-    ]
-    
