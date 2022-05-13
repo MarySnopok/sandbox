@@ -23,11 +23,13 @@ type Model =
     {
       Items: Item []
       Popup: bool
+      Notification: bool
     }
     static member Empty =
         {
             Items = [||]
             Popup = false
+            Notification = true
         }
 
 //list of possible actions
@@ -36,7 +38,7 @@ type Msg =
     | ItemsLoaded of Item []
     | Log of Item []
     | TogglePopup
-   // | HidePopup
+    | HideNotification
 
 //initiate default state
 let init () : Model * Cmd<Msg> = Model.Empty, Cmd.none
@@ -91,7 +93,7 @@ let update (msg: Msg) model =
             log $"We have {items.[i].Title}"
         { model with Items = items }, Cmd.none
     
-    //    | HidePopup -> {model with Popup = false}, Cmd.none
+    | HideNotification -> {model with Notification = false}, Cmd.none
 
 let itemDetails (item: Item) =
     div [ Class "details-container" ] [
@@ -112,10 +114,9 @@ let itemView (item: Item) =
         ]
     ]
 
-
 let view (model: Model) dispatch =
     div [] [
-        button [ OnClick(fun _ -> dispatch LoadItems) ] [ str "Lololo" ]
+        button [ OnClick(fun _ -> dispatch LoadItems) ] [ str "Load items" ]
         match model.Items with
         | [||] ->
             div [ Class "placeholder-message" ] [str "Press button to load more"]
