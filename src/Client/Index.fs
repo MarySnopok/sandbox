@@ -1,4 +1,4 @@
-module Client
+module Index
 
 open Fulma
 open Elmish
