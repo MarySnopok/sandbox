@@ -6,6 +6,7 @@
     </PropertyGroup>
     <ItemGroup>
         <Compile Include="Components\Logo.fs" />
+        <Compile Include="Components\Button.fs" />
         <Compile Include="Homepage.fs" />
         <Compile Include="Addresspage.fs" />
         <Compile Include="Personpage.fs" />

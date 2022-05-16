@@ -12,6 +12,7 @@ open Logo
 open HomePage
 open AddressPage
 open PersonPage
+open ButtonF
 
 type Page =
     | HomePage
@@ -47,16 +48,16 @@ let update (msg : Msg) (model : Model) : Model * Cmd<Msg> =
     match msg with
     | PersonNameChanged name -> { model with NameEntry = name }, Cmd.none
 
-let button txt href options =
+(*let button txt href options =
     Button.a
         [ Button.Color IsPrimary
           Button.Props [ Href href ]
           yield! options ]
-        [ str txt ]
+        [ str txt ]*)
 
 let view (model : Model) (dispatch : Msg -> unit) =
     let navigationButton text href page model =
-        button text href [
+        btn text href [
             Button.IsFullWidth
             if model.CurrentPage = page then Button.Color IsSuccess
         ]
@@ -84,7 +85,7 @@ let view (model : Model) (dispatch : Msg -> unit) =
                     Control.div [ Control.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ] ] [
                         br []
                         let href = sprintf "#person/%s" model.NameEntry
-                        button (sprintf "Set URL to '%s'" href) href [ ]
+                        btn (sprintf "Set URL to '%s'" href) href [ ]
                     ]
                 ]
             ]
