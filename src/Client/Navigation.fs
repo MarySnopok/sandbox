@@ -1,4 +1,4 @@
-module Navigation
+module NavigationF
 
     
 open Fulma
@@ -12,22 +12,22 @@ open Elmish.UrlParser
 open HomePage
 open AddressPage
 open PersonPage
-open Index
+open Browser.Types
+open IndexF
 
-[<RequireQualifiedAccess>]
-
-let pageParser : Parser<_,_> =
+//[<RequireQualifiedAccess>]
+let pageParser : Parser<_, IndexF.Page> =
      oneOf [
-            map HomePage (s "home")
-            map AddressPage (s "address")
-            map PersonPage (s "person" </> str)
+            map IndexF.Page.HomePage (s "home")
+            map IndexF.Page.AddressPage (s "address")
+            map IndexF.Page.PersonPage (s "person" </> str)
         ]
+        
+let urlUpdate (page: IndexF.Page option) _ =
+    let page = page |> Option.defaultValue IndexF.Page.HomePage
 
-let urlUpdate (page: Index.Page option) _ =
-    let page = page |> Option.defaultValue HomePage
-
-    let model, _ = Some page |> init
+    let model, _ = Some page |> IndexF.init
 
     { model with
-            Index.Model.CurrentPage = page;
-            Index.SubModel = model.Index.SubModel }, Cmd.none
+            CurrentPage = page;
+            SubModel = model.SubModel }, Cmd.none

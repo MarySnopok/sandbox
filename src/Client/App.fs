@@ -1,7 +1,7 @@
 module App
 
 open Fable.Core.JsInterop
-open Index
+open IndexF
 open Elmish
 open Elmish.React
 open Fable.React
@@ -9,9 +9,9 @@ open Fable.React.Props
 open Fable.Core.JsInterop
 open Elmish.Navigation
 open Elmish.UrlParser
+open NavigationF
 
 importSideEffects "./styles/global.sass"
-
 
 
 #if DEBUG
@@ -19,10 +19,8 @@ open Elmish.Debug
 open Elmish.HMR
 #endif
 
-
-
-Program.mkProgram Index.init Index.update Index.view
-|> Program.toNavigable (UrlParser.parseHash Index.Navigation.pageParser) Index.Navigation.urlUpdate
+Program.mkProgram IndexF.init IndexF.update IndexF.view
+|> Program.toNavigable (UrlParser.parseHash NavigationF.pageParser) NavigationF.urlUpdate
 #if DEBUG
 |> Program.withConsoleTrace
 #endif

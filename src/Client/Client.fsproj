@@ -9,9 +9,12 @@
         <Compile Include="Homepage.fs" />
         <Compile Include="Addresspage.fs" />
         <Compile Include="Personpage.fs" />
+        <Compile Include="Index.fs" />
+        <Compile Include="Navigation.fs" />
+        <Compile Include="App.fs" />
         <None Include="index.html" />
         <None Include="paket.references" />
-        <Compile Include="Index.fs" />
+        
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\Shared\Shared.fsproj" />

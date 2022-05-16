@@ -1,4 +1,4 @@
-module Index
+module IndexF
 
 open Fulma
 open Elmish
@@ -106,7 +106,7 @@ let view (model : Model) (dispatch : Msg -> unit) =
         ]
     ]
 
-module Navigation =
+(*module Navigation =
     open Elmish.UrlParser
 
     let pageParser : Parser<_,_> =
@@ -139,4 +139,4 @@ Program.mkProgram init update view
 #if DEBUG
 |> Program.withDebugger
 #endif
-|> Program.run
+|> Program.run*)
