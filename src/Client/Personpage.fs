@@ -8,7 +8,7 @@ open Fable.React.Props
 open Fable.Core.JsInterop
 open Elmish.Navigation
 
-type Model = { Name : string }
+type PersonModel = { Name : string }
 
 let init fullName = { Name = fullName }
 

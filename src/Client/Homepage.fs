@@ -8,11 +8,11 @@ open Fable.React.Props
 open Fable.Core.JsInterop
 open Elmish.Navigation
 
-type Model = { Title : string }
+type HomeModel = { Title : string }
 
 let init () = { Title = "Welcome! You're in the Home Page." }
 
-let view (model: Model) dispatch =
+let view (model: HomeModel) dispatch =
         div [] [
             Content.content [
                 Content.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ]

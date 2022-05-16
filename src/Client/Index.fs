@@ -9,8 +9,11 @@ open Fable.Core.JsInterop
 open Elmish.Navigation
 
 open Logo
+open HomePage
+open AddressPage
+open PersonPage
 
-module HomePage =
+(*module HomePage =
 
     type Model = { Title : string }
 
@@ -23,8 +26,8 @@ module HomePage =
             ] [
                 Heading.h1 [] [ str model.Title ]
             ]
-        ]
-
+        ]*)
+(*
 module PersonPage = 
 
     type Model = { Name : string }
@@ -38,8 +41,8 @@ module PersonPage =
         Heading.h1 [ Heading.Option.Props [ Style [ Margin "2rem" ] ] ] [ str "Person Details" ]
         Heading.h3 [ Heading.IsSubtitle ] [ str (sprintf "Full Name: %s" model.Name) ]
     ]
-
-module AddressPage =
+*)
+(*module AddressPage =
 
     type Model =
         { BuildingNo : int
@@ -62,7 +65,7 @@ module AddressPage =
             Heading.h3 [ Heading.IsSubtitle ] [ str (sprintf "Street: %s" model.Street) ]
             Heading.h3 [ Heading.IsSubtitle ] [ str (sprintf "City: %s" model.City) ]
             Heading.h3 [ Heading.IsSubtitle ] [ str (sprintf "Postcode: %s" model.Postcode) ]
-        ]
+        ]*)
 
 type Page =
     | HomePage
@@ -70,9 +73,9 @@ type Page =
     | PersonPage of string
 
 type SubModel =
-    | HomePageModel of HomePage.Model
-    | AddressPageModel of AddressPage.Model
-    | PersonPageModel of PersonPage.Model
+    | HomePageModel of HomePage.HomeModel
+    | AddressPageModel of AddressPage.AddressModel
+    | PersonPageModel of PersonPage.PersonModel
 
 type Model =
     { NameEntry: string

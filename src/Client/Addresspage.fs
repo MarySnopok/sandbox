@@ -9,7 +9,7 @@ open Fable.Core.JsInterop
 open Elmish.Navigation
 
 
-type Model =
+type AddressModel =
         { BuildingNo : int
           Street : string
           City : string
