@@ -13,60 +13,6 @@ open HomePage
 open AddressPage
 open PersonPage
 
-(*module HomePage =
-
-    type Model = { Title : string }
-
-    let init () = { Title = "Welcome! You're in the Home Page." }
-
-    let view (model: Model) dispatch =
-        div [] [
-            Content.content [
-                Content.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ]
-            ] [
-                Heading.h1 [] [ str model.Title ]
-            ]
-        ]*)
-(*
-module PersonPage = 
-
-    type Model = { Name : string }
-
-    let init fullName = { Name = fullName }
-
-    let view model dispatch =
-        Content.content [
-        Content.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ]
-        ] [
-        Heading.h1 [ Heading.Option.Props [ Style [ Margin "2rem" ] ] ] [ str "Person Details" ]
-        Heading.h3 [ Heading.IsSubtitle ] [ str (sprintf "Full Name: %s" model.Name) ]
-    ]
-*)
-(*module AddressPage =
-
-    type Model =
-        { BuildingNo : int
-          Street : string
-          City : string
-          Postcode : string }
-
-    let init () =
-      { BuildingNo = 41
-        City = "London"
-        Postcode = "P21 1XX"
-        Street = "Liverpool St" }
-
-    let view model dispatch =
-        Content.content [
-            Content.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ]
-        ] [
-            Heading.h1 [ Heading.Props [ Style [ Margin "2rem" ] ] ] [ str "Address" ]
-            Heading.h3 [ Heading.IsSubtitle ] [ str (sprintf "Building No: %d" model.BuildingNo) ]
-            Heading.h3 [ Heading.IsSubtitle ] [ str (sprintf "Street: %s" model.Street) ]
-            Heading.h3 [ Heading.IsSubtitle ] [ str (sprintf "City: %s" model.City) ]
-            Heading.h3 [ Heading.IsSubtitle ] [ str (sprintf "Postcode: %s" model.Postcode) ]
-        ]*)
-
 type Page =
     | HomePage
     | AddressPage
