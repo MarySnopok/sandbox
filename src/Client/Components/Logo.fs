@@ -12,8 +12,6 @@ let logo =
                 style.backgroundColor "teal"
                 style.borderRadius 100
                 style.marginLeft 20
-                style.display "flex"
-                style.alignSelf "flex-end"
             ]
             prop.children [
                 Html.img [
