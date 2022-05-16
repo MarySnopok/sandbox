@@ -5,7 +5,7 @@
         <DefineConstants>FABLE_COMPILER</DefineConstants>
     </PropertyGroup>
     <ItemGroup>
-        <Compile Include="Components\Title.fs" />
+        <Compile Include="Components\Logo.fs" />
         <None Include="index.html" />
         <None Include="paket.references" />
         <Compile Include="Index.fs" />

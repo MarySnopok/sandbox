@@ -1,15 +1,19 @@
-module Title
+module Logo
 
 open Feliz
 open Feliz.Bulma
 
-let brand =
+let logo =
     Bulma.navbarBrand.div [
         Bulma.navbarItem.a [
             prop.href "https://safe-stack.github.io/"
             navbarItem.isActive
             prop.style [
-                style.backgroundColor "red"
+                style.backgroundColor "teal"
+                style.borderRadius 100
+                style.marginLeft 20
+                style.display "flex"
+                style.alignSelf "flex-end"
             ]
             prop.children [
                 Html.img [

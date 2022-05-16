@@ -8,7 +8,10 @@ open Fable.React.Props
 open Fable.Core.JsInterop
 open Elmish.Navigation
 
+open Logo
+
 module HomePage =
+
     type Model = { Title : string }
 
     let init () = { Title = "Welcome! You're in the Home Page." }
@@ -22,20 +25,22 @@ module HomePage =
             ]
         ]
 
-module PersonPage =
+module PersonPage = 
+
     type Model = { Name : string }
 
     let init fullName = { Name = fullName }
 
     let view model dispatch =
         Content.content [
-            Content.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ]
+        Content.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ]
         ] [
-            Heading.h1 [ Heading.Option.Props [ Style [ Margin "2rem" ] ] ] [ str "Person Details" ]
-            Heading.h3 [ Heading.IsSubtitle ] [ str (sprintf "Full Name: %s" model.Name) ]
-        ]
+        Heading.h1 [ Heading.Option.Props [ Style [ Margin "2rem" ] ] ] [ str "Person Details" ]
+        Heading.h3 [ Heading.IsSubtitle ] [ str (sprintf "Full Name: %s" model.Name) ]
+    ]
 
 module AddressPage =
+
     type Model =
         { BuildingNo : int
           Street : string
@@ -106,11 +111,12 @@ let view (model : Model) (dispatch : Msg -> unit) =
             Button.IsFullWidth
             if model.CurrentPage = page then Button.Color IsSuccess
         ]
-
+ 
     div [] [
         Navbar.navbar [ Navbar.Color IsPrimary ] [
-            Navbar.Item.div [ ] [
+            Navbar.Item.div [  ] [
                 Heading.h1 [ ] [ str "Elmish navigation example" ]
+                logo
             ]
         ]
 
