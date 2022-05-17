@@ -1,12 +1,8 @@
 module PersonPage
 
 open Fulma
-open Elmish
-open Elmish.React
 open Fable.React
 open Fable.React.Props
-open Fable.Core.JsInterop
-open Elmish.Navigation
 
 type PersonModel = { Name : string }
 

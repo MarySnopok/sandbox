@@ -1,21 +1,13 @@
 module NavigationF
 
-    
-open Fulma
 open Elmish
-open Elmish.React
-open Fable.React
-open Fable.React.Props
-open Fable.Core.JsInterop
-open Elmish.Navigation
 open Elmish.UrlParser
 open HomePage
 open AddressPage
 open PersonPage
-open Browser.Types
 open IndexF
 
-//[<RequireQualifiedAccess>]
+
 let pageParser : Parser<_, IndexF.Page> =
      oneOf [
             map IndexF.Page.HomePage (s "home")

@@ -4,11 +4,7 @@ open Fable.Core.JsInterop
 open IndexF
 open Elmish
 open Elmish.React
-open Fable.React
-open Fable.React.Props
-open Fable.Core.JsInterop
 open Elmish.Navigation
-open Elmish.UrlParser
 open NavigationF
 
 importSideEffects "./styles/global.sass"

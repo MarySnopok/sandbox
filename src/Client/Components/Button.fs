@@ -1,11 +1,8 @@
 module ButtonF
 
 open Fulma
-open Elmish
-open Elmish.React
 open Fable.React
 open Fable.React.Props
-open Fable.Core.JsInterop
 
 
 let btn txt href options =

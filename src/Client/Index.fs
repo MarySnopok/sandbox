@@ -2,11 +2,9 @@ module IndexF
 
 open Fulma
 open Elmish
-open Elmish.React
 open Fable.React
 open Fable.React.Props
 open Fable.Core.JsInterop
-open Elmish.Navigation
 
 open Logo
 open HomePage
@@ -47,13 +45,6 @@ let init page : Model * Cmd<Msg> =
 let update (msg : Msg) (model : Model) : Model * Cmd<Msg> =
     match msg with
     | PersonNameChanged name -> { model with NameEntry = name }, Cmd.none
-
-(*let button txt href options =
-    Button.a
-        [ Button.Color IsPrimary
-          Button.Props [ Href href ]
-          yield! options ]
-        [ str txt ]*)
 
 let view (model : Model) (dispatch : Msg -> unit) =
     let navigationButton text href page model =
@@ -107,7 +98,8 @@ let view (model : Model) (dispatch : Msg -> unit) =
         ]
     ]
 
-(*module Navigation =
+(* original connect solution)
+module Navigation =
     open Elmish.UrlParser
 
     let pageParser : Parser<_,_> =
