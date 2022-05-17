@@ -4,7 +4,8 @@ open Elmish
 open Elmish.React
 open Fable.Core.JsInterop
 
-open IndexF
+open View
+open BannerModel
 
 importSideEffects "./styles/global.sass"
 
@@ -13,7 +14,7 @@ open Elmish.Debug
 open Elmish.HMR
 #endif
 
-Program.mkProgram IndexF.init IndexF.update IndexF.view
+Program.mkProgram BannerModel.init View.update View.view
 #if DEBUG
 |> Program.withConsoleTrace
 #endif

@@ -1,53 +1,15 @@
-module IndexF
+module View
 
-open Elmish
 open Fable.React
 open Fable.React.Props
-open Fable.Core
 open Browser
+open Elmish
 
 
-//https://thomasbandt.com/model-view-update?
-//https://zaid-ajaj.github.io/the-elmish-book/#/chapters/fable/
-// type of single item
-type Item =
-    { Title: string
-      ImageUrl: string
-      Price: string
-      Dimentions: string
-      Availability: string
-      Cart: int
-    }
+open BannerModel
 
-//type of state
-type Model =
-    {
-      Items: Item []
-      Popup: bool
-      Notification: bool
-    }
-    static member Empty =
-        {
-            Items = [||]
-            Popup = false
-            Notification = true
-        }
 
-//list of possible actions
-type Msg =
-    | LoadItems
-    | ItemsLoaded of Item []
-    | Log of Item []
-    | TogglePopup
-    | HideNotification
-
-//initiate default state
-let init () : Model * Cmd<Msg> = Model.Empty, Cmd.none
-let log (banana: string ) =
-    console.log(banana)
-log "Hello it is a string"
-
-//imulate api call
+    
 let loadItems _ =
     [| { Title = "Special screws for wood and concrete."
          ImageUrl =
@@ -83,18 +45,11 @@ let loadItems _ =
          }
          |]
 
-//update state based on Msg
 let update (msg: Msg) model =
-    match msg with
-    | TogglePopup -> {model with Popup = not model.Popup}, Cmd.none
-    | LoadItems -> model, Cmd.OfFunc.perform loadItems () ItemsLoaded 
-    | ItemsLoaded items -> { model with Items = items }, Cmd.ofMsg ( Log items )
-    | Log items ->
-        for i in 0 .. items.Length - 1 do
-            log $"We have {items.[i].Title}"
-        { model with Items = items }, Cmd.none
-    
-    | HideNotification -> {model with Notification = false}, Cmd.none
+        match msg with
+        | TogglePopup -> {model with Popup = not model.Popup}, Cmd.none
+        | LoadItems -> model, Cmd.OfFunc.perform loadItems ()
+        | HideNotification -> {model with Notification = false}, Cmd.none
 
 let itemDetails (item: Item) =
     div [ Class "details-container" ] [

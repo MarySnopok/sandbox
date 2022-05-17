@@ -1,7 +1,7 @@
-module LoadItems
+module LoadDataItems
 
-//imulate api call
-let LoadItems _ =
+
+let loadItems _ =
     [| { Title = "Special screws for wood and concrete."
          ImageUrl =
            "https://images.prismic.io/proffsmagasinet-se/d288febc-500a-41b9-9e13-0a85e58a7f63_dewalt_se_960x960.png?auto=compress,format&rect=0,0,960,960&w=924&h=924"
@@ -26,7 +26,7 @@ let LoadItems _ =
          Availability = "2-9 items"
          Cart = 10
         }
-       { Title = "Variety of tools of offer. Special price."
+       { Title = "Variety of tools on offer. Special price."
          ImageUrl =
            "https://images.prismic.io/proffsmagasinet-se/d288febc-500a-41b9-9e13-0a85e58a7f63_dewalt_se_960x960.png?auto=compress,format&rect=0,0,960,960&w=924&h=924"
          Price = "800 kr"
