@@ -1,10 +1,11 @@
-module Index
+module IndexF
 
 open Elmish
 open Fable.React
 open Fable.React.Props
 open Fable.Core
 open Browser
+
 
 //https://thomasbandt.com/model-view-update?
 //https://zaid-ajaj.github.io/the-elmish-book/#/chapters/fable/
@@ -72,7 +73,7 @@ let loadItems _ =
          Availability = "2-9 items"
          Cart = 10
         }
-       { Title = "Variety of tools of offer. Special price."
+       { Title = "Variety of tools on offer. Special price."
          ImageUrl =
            "https://images.prismic.io/proffsmagasinet-se/d288febc-500a-41b9-9e13-0a85e58a7f63_dewalt_se_960x960.png?auto=compress,format&rect=0,0,960,960&w=924&h=924"
          Price = "800 kr"
@@ -116,30 +117,29 @@ let itemView (item: Item) =
 
 let view (model: Model) dispatch =
     div [] [
-        button [ OnClick(fun _ -> dispatch LoadItems) ] [ str "Load items" ]
         match model.Items with
         | [||] ->
+            button [ OnClick(fun _ -> dispatch LoadItems) ] [ str "load items" ]
             div [ Class "placeholder-message" ] [str "Press button to load more"]
         | items ->
-            div [ Class "product-items-wrapper" ] (items |> Array.map itemView)
-            button [ OnClick(fun _ -> dispatch TogglePopup) ] [ str "view details" ]
+            if model.Notification
+            then
+                button [ OnClick(fun _ -> dispatch HideNotification) ] [ str "hide banners" ]
+                div [ Class "product-items-wrapper" ] (items |> Array.map itemView)
+                button [ OnClick(fun _ -> dispatch TogglePopup) ] [ str "view products" ]
             if model.Popup
             then
                 div [ Class "details-wrapper" ] [
-                div [ Class "details-container" ] [
-                    span [ Class "product-description" ] [ str "Price"]
-                    span [ Class "product-description" ] [ str "Dimentions"]
-                    span [ Class "product-description" ] [ str "Items left"]
-                    span [ Class "product-description" ] [ str "Product code"]
-                    ]
+                   div [ Class "details-container" ] [
+                       span [ Class "product-description" ] [ str "Price"]
+                       span [ Class "product-description" ] [ str "Dimentions"]
+                       span [ Class "product-description" ] [ str "Items left"]
+                       span [ Class "product-description" ] [ str "Product code"]
+                       ]
                 ]
                 div [ Class "details-wrapper" ] (items |> Array.map itemDetails)
 
     ]
 
 
-            //if model.Items = [||]
-        //then
-        //    div [ Class "placeholder-message" ]  [str "Press button to load more"]
-        //else
-        //    div [ Class "grid" ] (model.Items |> Array.map itemView)
+      
