@@ -5,11 +5,9 @@ open Fable.React.Props
 open Browser
 open Elmish
 
-
 open BannerModel
 
 
-    
 let loadItems _ =
     [| { Title = "Special screws for wood and concrete."
          ImageUrl =
@@ -45,13 +43,14 @@ let loadItems _ =
          }
          |]
 
-let update (msg: Msg) model =
+let update (msg: BannerModel.Msg) model =
         match msg with
         | TogglePopup -> {model with Popup = not model.Popup}, Cmd.none
         | LoadItems -> model, Cmd.OfFunc.perform loadItems ()
         | HideNotification -> {model with Notification = false}, Cmd.none
+    
 
-let itemDetails (item: Item) =
+let itemDetails (item: BannerModel.Item) =
     div [ Class "details-container" ] [
          span [ Class "product-details" ] [ str item.Price ]
          span [ Class "product-details" ] [ str item.Dimentions ]
@@ -59,7 +58,7 @@ let itemDetails (item: Item) =
          span [ Class "product-details" ] [ str (string item.Cart) ]
     ]
 
-let itemView (item: Item) =
+let itemView (item: BannerModel.Item) =
     div [ Class "picture-container" ] [
         div [ OnClick(fun _ -> window.alert("Dont press on me!")) ] [
             img [
@@ -70,7 +69,7 @@ let itemView (item: Item) =
         ]
     ]
 
-let view (model: Model) dispatch =
+let view (model: BannerModel.Model) dispatch =
     div [] [
         match model.Items with
         | [||] ->

@@ -1,11 +1,9 @@
 module BannerModel
 
 open Elmish
+
 open Fable.React
 open Fable.React.Props
-open Fable.Core
-open Browser
-
 
 type Item =
         { Title: string
@@ -37,3 +35,4 @@ type Msg =
 
 //initiate default state
 let init () : Model * Cmd<Msg> = Model.Empty, Cmd.none
+
