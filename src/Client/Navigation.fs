@@ -12,7 +12,7 @@ let pageParser : Parser<_, IndexF.Page> =
      oneOf [
             map IndexF.Page.HomePage (s "home")
             map IndexF.Page.AddressPage (s "address")
-            map IndexF.Page.PersonPage (s "person" </> str)
+            map IndexF.Page.PersonPage (s "product" </> str)
         ]
         
 let urlUpdate (page: IndexF.Page option) _ =

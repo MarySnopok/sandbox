@@ -9,9 +9,9 @@ let logo =
             prop.href "https://safe-stack.github.io/"
             navbarItem.isActive
             prop.style [
-                style.backgroundColor "teal"
                 style.borderRadius 100
                 style.marginLeft 20
+
             ]
             prop.children [
                 Html.img [

@@ -53,11 +53,12 @@ let view (model : Model) (dispatch : Msg -> unit) =
             if model.CurrentPage = page then Button.Color IsSuccess
         ]
  
-    div [] [
-        Navbar.navbar [ Navbar.Color IsPrimary ] [
-            Navbar.Item.div [  ] [
-                Heading.h1 [ ] [ str "Elmish navigation example" ]
-                logo
+    div [Class "nav"  ] [
+        Navbar.navbar [ ] [
+            Navbar.Item.div [ ] [
+                Heading.h1 [ ] [ str "Lorem ipsum dolor sit amet " ]
+                //logo
+                
             ]
         ]
 
@@ -66,7 +67,7 @@ let view (model : Model) (dispatch : Msg -> unit) =
                 Column.column [ Column.Width (Screen.All, Column.Is3) ] [
                     Control.div [ Control.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ] ] [
                         br []
-                        Label.label [] [ str "Name" ]
+
                         Input.text [
                             Input.Value model.NameEntry
                             Input.Placeholder "Enter Name Here..."
@@ -75,7 +76,7 @@ let view (model : Model) (dispatch : Msg -> unit) =
                     ]
                     Control.div [ Control.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ] ] [
                         br []
-                        let href = sprintf "#person/%s" model.NameEntry
+                        let href = sprintf "#product/%s" model.NameEntry
                         btn (sprintf "Set URL to '%s'" href) href [ ]
                     ]
                 ]
@@ -98,38 +99,3 @@ let view (model : Model) (dispatch : Msg -> unit) =
         ]
     ]
 
-(* original connect solution)
-module Navigation =
-    open Elmish.UrlParser
-
-    let pageParser : Parser<_,_> =
-        oneOf [
-            map HomePage (s "home")
-            map AddressPage (s "address")
-            map PersonPage (s "person" </> str)
-        ]
-
-    let urlUpdate (page: Page option) _ =
-        let page = page |> Option.defaultValue HomePage
-
-        let model, _ = Some page |> init
-
-        { model with
-            CurrentPage = page;
-            SubModel = model.SubModel }, Cmd.none
-
-#if DEBUG
-open Elmish.Debug
-open Elmish.HMR
-#endif
-
-Program.mkProgram init update view
-|> Program.toNavigable (UrlParser.parseHash Navigation.pageParser) Navigation.urlUpdate
-#if DEBUG
-|> Program.withConsoleTrace
-#endif
-|> Program.withReactBatched "elmish-app"
-#if DEBUG
-|> Program.withDebugger
-#endif
-|> Program.run*)

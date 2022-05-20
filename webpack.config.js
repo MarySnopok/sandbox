@@ -132,3 +132,4 @@ module.exports = {
 function resolve(filePath) {
     return path.isAbsolute(filePath) ? filePath : path.join(__dirname, filePath);
 }
+

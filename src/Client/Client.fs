@@ -31,7 +31,7 @@ module PersonPage =
         Content.content [
             Content.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ]
         ] [
-            Heading.h1 [ Heading.Option.Props [ Style [ Margin "2rem" ] ] ] [ str "Person Details" ]
+            Heading.h1 [ Heading.Option.Props [ Style [ Margin "2rem" ] ] ] [ str "Product Details" ]
             Heading.h3 [ Heading.IsSubtitle ] [ str (sprintf "Full Name: %s" model.Name) ]
         ]
 
@@ -128,7 +128,7 @@ let view (model : Model) (dispatch : Msg -> unit) =
                     ]
                     Control.div [ Control.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ] ] [
                         br []
-                        let href = sprintf "#person/%s" model.NameEntry
+                        let href = sprintf "#product/%s" model.NameEntry
                         button (sprintf "Set URL to '%s'" href) href [ ]
                     ]
                 ]
@@ -158,7 +158,7 @@ module Navigation =
         oneOf [
             map HomePage (s "home")
             map AddressPage (s "address")
-            map PersonPage (s "person" </> str)
+            map PersonPage (s "product" </> str)
         ]
 
     let urlUpdate (page: Page option) _ =
