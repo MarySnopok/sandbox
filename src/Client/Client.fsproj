@@ -10,7 +10,7 @@
         <Compile Include="Homepage.fs" />
         <Compile Include="Addresspage.fs" />
         <Compile Include="Personpage.fs" />
-        <Compile Include="Index.fs" />
+        <Compile Include="IndexF.fs" />
         <Compile Include="Navigation.fs" />
         <Compile Include="App.fs" />
         <None Include="index.html" />

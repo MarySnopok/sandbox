@@ -12,10 +12,10 @@ type AddressModel =
           Postcode : string }
 
 let init () =
-      { BuildingNo = 41
-        City = "London"
-        Postcode = "P21 1XX"
-        Street = "Liverpool St" }
+      { BuildingNo = 1
+        City = "Saint-Louse"
+        Postcode = "123456"
+        Street = "Niclas Hall" }
 
 let view model dispatch =
         Content.content [

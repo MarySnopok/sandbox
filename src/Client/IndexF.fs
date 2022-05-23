@@ -57,7 +57,7 @@ let view (model : Model) (dispatch : Msg -> unit) =
         Navbar.navbar [ ] [
             Navbar.Item.div [ ] [
                 Heading.h1 [ ] [ str "Lorem ipsum dolor sit amet " ]
-                //logo
+                logo
                 
             ]
         ]
