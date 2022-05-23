@@ -84,7 +84,9 @@ let view (model : Model) (dispatch : Msg -> unit) =
                         let href = sprintf "#destination/%s" model.NameEntry
                         btn (sprintf "Set URL to '%s'" href) href [ ]
                     ]
-                    button [onCLick (fun ev -> dispatch (AddressChange true) ]
+                    button [onCLick (fun ev -> dispatch (AddressChange true)] [
+
+                    ]
                 ]
             ]
         ]
