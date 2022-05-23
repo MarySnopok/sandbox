@@ -8,6 +8,7 @@
         <Compile Include="Components\Title.fs" />
         <None Include="index.html" />
         <None Include="paket.references" />
+        <Compile Include="Product.fs" />
         <Compile Include="Index.fs" />
         <Compile Include="App.fs" />
     </ItemGroup>
