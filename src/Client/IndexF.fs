@@ -6,11 +6,14 @@ open Fable.React
 open Fable.React.Props
 open Fable.Core.JsInterop
 
+//IU components
 open Logo
+open ButtonF
+
+//pages 
 open HomePage
 open AddressPage
 open PersonPage
-open ButtonF
 
 type Page =
     | HomePage
@@ -27,7 +30,9 @@ type Model =
       CurrentPage: Page
       SubModel: SubModel }
 
-type Msg = PersonNameChanged of string
+type Msg =
+     |PersonNameChanged of string
+     |AddressChange of bool
 
 let init page : Model * Cmd<Msg> =
     let page = page |> Option.defaultValue HomePage
@@ -45,6 +50,7 @@ let init page : Model * Cmd<Msg> =
 let update (msg : Msg) (model : Model) : Model * Cmd<Msg> =
     match msg with
     | PersonNameChanged name -> { model with NameEntry = name }, Cmd.none
+    | AddressChange bool -> AddressPage.updateAddress(), Cmd.none
 
 let view (model : Model) (dispatch : Msg -> unit) =
     let navigationButton text href page model =
@@ -58,7 +64,6 @@ let view (model : Model) (dispatch : Msg -> unit) =
             Navbar.Item.div [ ] [
                 Heading.h1 [ ] [ str "Lorem ipsum dolor sit amet " ]
                 logo
-                
             ]
         ]
 
@@ -76,14 +81,15 @@ let view (model : Model) (dispatch : Msg -> unit) =
                     ]
                     Control.div [ Control.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ] ] [
                         br []
-                        let href = sprintf "#product/%s" model.NameEntry
+                        let href = sprintf "#destination/%s" model.NameEntry
                         btn (sprintf "Set URL to '%s'" href) href [ ]
                     ]
+                    button [onCLick (fun ev -> dispatch (AddressChange true) ]
                 ]
             ]
         ]
 
-        Container.container [ ] [
+        div [ ] [
             Columns.columns [ Columns.Option.Props [ Style  [ Margin "3em" ] ] ] [
                 Column.column [] [ navigationButton "HOME PAGE" "#home" HomePage model ]
                 Column.column [] [ navigationButton "ADDRESS PAGE" "#address" AddressPage model ]

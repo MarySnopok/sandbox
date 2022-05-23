@@ -3,6 +3,7 @@ module AddressPage
 open Fulma
 open Fable.React
 open Fable.React.Props
+open Browser
 
 
 type AddressModel =
@@ -10,6 +11,10 @@ type AddressModel =
           Street : string
           City : string
           Postcode : string }
+
+
+let updateAddress () =
+    window.alert("here is the adress msg")
 
 let init () =
       { BuildingNo = 1
