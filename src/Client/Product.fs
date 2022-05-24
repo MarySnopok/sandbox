@@ -26,13 +26,13 @@ type Model =
 
 //list of possible actions
 type Msg =
-    | LoadItems
+    | LoadDetails
 
 //initiate default state
 let init () : Model * Cmd<Msg> = Model.Empty, Cmd.none
 
 //imulate api call
-let loadItems _ =
+let loadDetails _ =
     [| { Price = "300 kr"
          Dimentions = "20 cm  15 cm  15 cm"
          Availability = true
@@ -53,12 +53,12 @@ let loadItems _ =
          Availability = true
          Cart = 20
         }
-     |]
+    |]
 
 //update state based on Msg
 let update (msg: Msg) model =
     match msg with
-    | LoadItems -> model, Cmd.OfFunc.perform loadItems ()
+    | LoadDetails -> model, Cmd.OfFunc.perform loadDetails ()
 
 
 let itemDetails (item: Item) =
@@ -71,12 +71,14 @@ let itemDetails (item: Item) =
             ]
         else
             div [ Class "details-container" ] [
-               str "missed data"
+               str "data is missed"
             ]
 
 //whats up with items -> array map
-let view (model: Model, items: Item) dispatch =
-    div [OnLoad(fun _ -> dispatch LoadItems)] [
+let view (model: Model) dispatch =
+    match model.Items with
+    | items ->
+        div [OnLoad(fun _ -> dispatch LoadDetails)] [
             div [ Class "product-items-wrapper" ] [
                 div [ Class "details-wrapper" ] [
                 div [ Class "details-container" ] [
@@ -86,7 +88,6 @@ let view (model: Model, items: Item) dispatch =
                     ]
                 ]
                 div [ Class "details-wrapper" ] (items |> Array.map itemDetails)
-
             ]
-    ]
+        ]
 

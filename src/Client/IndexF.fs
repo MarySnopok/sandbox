@@ -1,4 +1,4 @@
-module Index
+module IndexF
 
 open Elmish
 open Fable.React
@@ -6,7 +6,7 @@ open Fable.React.Props
 open Fable.Core
 open Browser
 
-open Product
+(*open Product*)
 
 //https://thomasbandt.com/model-view-update?
 //https://zaid-ajaj.github.io/the-elmish-book/#/chapters/fable/
@@ -93,17 +93,17 @@ let itemView (item: Item) =
 
 let view (model: Model) dispatch =
     div [] [
-        button [ OnClick(fun _ -> dispatch LoadItems) ] [ str "Load items" ]
         match model.Items with
         | [||] ->
+            button [ OnClick(fun _ -> dispatch LoadItems) ] [ str "Load items" ]
             div [ Class "placeholder-message" ] [str "Press button to load more"]
         | items ->
             div [ Class "product-items-wrapper" ] (items |> Array.map itemView)
-            button [ OnClick(fun _ -> dispatch TogglePopup) ] [ str "view details" ]
+            button [ OnClick(fun _ -> dispatch TogglePopup) ] [ str "info" ]
             if model.Popup
             then
                 div [ Class "details-wrapper" ] [
-                    str "forward to product page on click"
+                    str "click the product banner for extra details"
                 (*div [ Class "details-container" ] [
                     span [ Class "product-description" ] [ str "Price"]
                     span [ Class "product-description" ] [ str "Dimentions"]
