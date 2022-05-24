@@ -1,4 +1,6 @@
-module App
+namespace Client
+
+
 
 open Elmish
 open Elmish.React
@@ -6,22 +8,24 @@ open Fable.Core.JsInterop
 open Elmish.Navigation
 open Elmish.UrlParser
 open NavigationF
-open Mainmodel
+open Model
 
-importSideEffects "./styles/global.sass"
+module App =
 
-#if DEBUG
-open Elmish.Debug
-open Elmish.HMR
-#endif
+    importSideEffects "./styles/global.sass"
 
-Program.mkProgram Mainmodel.init Mainmodel.update Mainmodel.view
-|> Program.toNavigable (UrlParser.parseHash NavigationF.pageParser) NavigationF.urlUpdate
-#if DEBUG
-|> Program.withConsoleTrace
-#endif
-|> Program.withReactSynchronous "elmish-app"
-#if DEBUG
-|> Program.withDebugger
-#endif
-|> Program.run
+    #if DEBUG
+    open Elmish.Debug
+    open Elmish.HMR
+    #endif
+
+    Program.mkProgram State.init State.update View.view
+    //|> Program.toNavigable (UrlParser.parseHash NavigationF.pageParser) NavigationF.urlUpdate
+    #if DEBUG
+    |> Program.withConsoleTrace
+    #endif
+    |> Program.withReactSynchronous "elmish-app"
+    #if DEBUG
+    |> Program.withDebugger
+    #endif
+    |> Program.run

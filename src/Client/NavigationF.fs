@@ -1,27 +1,28 @@
-module NavigationF
+namespace Client
 
+
+open Client.Model
 open Elmish
 open Elmish.React
 open Fable.Core.JsInterop
 open Elmish.Navigation
 open Elmish.UrlParser
 open Product
-open Mainmodel
-open IndexF
+open Client.State
+open Index
 
-
-
-let pageParser : Parser<_, Mainmodel.Page> =
-     oneOf [
-            map Mainmodel.Page.Product (s "product")
-            map Mainmodel.Page.IndexF (s "indexF")
-        ]
-        
-let urlUpdate (page: Mainmodel.Page option) _ =
-    let page = page |> Option.defaultValue Mainmodel.Page.index
-
-    let model, _ = Some page |> Mainmodel.init
-
-    { model with
-            CurrentPage = page;
-            SubModel = model.SubModel }, Cmd.none
+module NavigationF =
+    let x = 0
+//    let pageParser : Parser<_, Model> =
+//        oneOf [
+//            map (Model.Page.Product ) (s "product")
+//            //map Model.Page.IndexF (s "indexF")
+//        ]
+//
+//    let urlUpdate () model =
+//        //let page = page |> Option.defaultValue (Model.Page.IndexF (Model.BannerModel.Empty))
+//
+//        //let model, _ = State.init ()
+//
+//        //{ model with CurrentPage = page }, Cmd.none
+//        model, Cmd.none
