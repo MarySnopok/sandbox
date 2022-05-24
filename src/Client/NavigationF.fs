@@ -1,18 +1,20 @@
 module NavigationF
 
 open Elmish
-
+open Elmish.React
+open Fable.Core.JsInterop
+open Elmish.Navigation
 open Elmish.UrlParser
 open Product
 open Mainmodel
 open IndexF
-open View
+
 
 
 let pageParser : Parser<_, Mainmodel.Page> =
      oneOf [
             map Mainmodel.Page.Product (s "product")
-            map Mainmodel.Page.IndexF (s "index")
+            map Mainmodel.Page.IndexF (s "indexF")
         ]
         
 let urlUpdate (page: Mainmodel.Page option) _ =

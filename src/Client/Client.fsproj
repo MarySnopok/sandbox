@@ -9,7 +9,9 @@
         <None Include="index.html" />
         <None Include="paket.references" />
         <Compile Include="IndexF.fs" />
-        <Compile Include="View.fs" />
+        <Compile Include="Product.fs" />
+        <Compile Include="Mainmodel.fs" />
+        <Compile Include="NavigationF.fs" />
         <Compile Include="App.fs" />
     </ItemGroup>
     <ItemGroup>

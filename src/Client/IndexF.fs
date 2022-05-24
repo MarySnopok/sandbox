@@ -5,9 +5,9 @@ open Fable.React
 open Fable.React.Props
 open Fable.Core
 open Browser
+open Mainmodel
 
-(*open Product
-*)
+
 //https://thomasbandt.com/model-view-update?
 //https://zaid-ajaj.github.io/the-elmish-book/#/chapters/fable/
 // type of single item
@@ -33,6 +33,7 @@ type Msg =
     | LoadItems
     | ItemsLoaded of Item []
     | TogglePopup
+    | Change
 
 //initiate default state
 let init () : BannerModel * Cmd<Msg> = BannerModel.Empty, Cmd.none
@@ -61,8 +62,37 @@ let loadItems _ =
 let update (msg: Msg) model =
     match msg with
     | TogglePopup -> {model with Popup = not model.Popup}, Cmd.none
-    | LoadItems -> model, Cmd.OfFunc.perform loadItems () ItemsLoaded 
+    | LoadItems -> model, Cmd.OfFunc.perform loadItems () ItemsLoaded
     | ItemsLoaded items -> { model with Items = items }, Cmd.none
+    | Change -> Mainmodel.PageChange, Cmd.none
+
+let itemView (item: Item) =
+    div [ Class "picture-container" ] [
+        div [ OnClick(fun _ -> dispatch Change) ] [
+            img [
+                Class "picture"
+                Src item.ImageUrl
+            ]
+            span [ Class "title" ] [ str item.Title ]
+        ]
+    ]
+
+let view (model: BannerModel) dispatch =
+    div [] [
+        match model.Items with
+        | [||] ->
+            button [ OnClick(fun _ -> dispatch LoadItems) ] [ str "Load items" ]
+            div [ Class "placeholder-message" ] [str "Press button to load more"]
+        | items ->
+            div [ Class "product-items-wrapper" ] (items |> Array.map itemView)
+            button [ OnClick(fun _ -> dispatch TogglePopup) ] [ str "info" ]
+            if model.Popup
+            then
+                div [ Class "details-wrapper" ] [
+                    str "click the product banner for extra details"
+    ]
+    ]
+
 
 
 

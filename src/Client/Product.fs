@@ -76,7 +76,7 @@ let itemDetails (item: Item) =
             ]
 
 //whats up with items -> array map
-let ProductView (model: ProductModel) dispatch =
+let view (model: ProductModel) dispatch =
     match model.Items with
     | items ->
         div [OnLoad(fun _ -> dispatch LoadDetails)] [
