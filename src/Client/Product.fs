@@ -15,7 +15,7 @@ type Item =
     }
 
 //type of state
-type Model =
+type ProductModel =
     {
       Items: Item []
     }
@@ -29,7 +29,7 @@ type Msg =
     | LoadDetails
 
 //initiate default state
-let init () : Model * Cmd<Msg> = Model.Empty, Cmd.none
+let init () : ProductModel * Cmd<Msg> = ProductModel.Empty, Cmd.none
 
 //imulate api call
 let loadDetails _ =
@@ -61,6 +61,7 @@ let update (msg: Msg) model =
     | LoadDetails -> model, Cmd.OfFunc.perform loadDetails ()
 
 
+// Product comp
 let itemDetails (item: Item) =
         if item.Availability
         then
@@ -75,7 +76,7 @@ let itemDetails (item: Item) =
             ]
 
 //whats up with items -> array map
-let view (model: Model) dispatch =
+let ProductView (model: ProductModel) dispatch =
     match model.Items with
     | items ->
         div [OnLoad(fun _ -> dispatch LoadDetails)] [

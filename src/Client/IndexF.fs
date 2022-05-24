@@ -6,8 +6,8 @@ open Fable.React.Props
 open Fable.Core
 open Browser
 
-(*open Product*)
-
+(*open Product
+*)
 //https://thomasbandt.com/model-view-update?
 //https://zaid-ajaj.github.io/the-elmish-book/#/chapters/fable/
 // type of single item
@@ -17,7 +17,7 @@ type Item =
     }
 
 //type of state
-type Model =
+type BannerModel =
     {
       Items: Item []
       Popup: bool
@@ -34,10 +34,8 @@ type Msg =
     | ItemsLoaded of Item []
     | TogglePopup
 
-
-
 //initiate default state
-let init () : Model * Cmd<Msg> = Model.Empty, Cmd.none
+let init () : BannerModel * Cmd<Msg> = BannerModel.Empty, Cmd.none
 
 //imulate api call
 let loadItems _ =
@@ -65,53 +63,6 @@ let update (msg: Msg) model =
     | TogglePopup -> {model with Popup = not model.Popup}, Cmd.none
     | LoadItems -> model, Cmd.OfFunc.perform loadItems () ItemsLoaded 
     | ItemsLoaded items -> { model with Items = items }, Cmd.none
- (*   | Log items ->
-        for i in 0 .. items.Length - 1 do
-            log $"We have {items.[i].Title}"
-        { model with Items = items }, Cmd.none*)
-    
-  (*  | HideNotification -> {model with Notification = false}, Cmd.none*)
 
-(*let itemDetails (item: Item) =
-    div [ Class "details-container" ] [
-         span [ Class "product-details" ] [ str item.Price ]
-         span [ Class "product-details" ] [ str item.Dimentions ]
-         span [ Class "product-details" ] [ str item.Availability ]
-         span [ Class "product-details" ] [ str (string item.Cart) ]
-    ]*)
 
-let itemView (item: Item) =
-    div [ Class "picture-container" ] [
-        div [ OnClick(fun _ -> window.alert("Dont press on me!")) ] [
-            img [
-                Class "picture"
-                Src item.ImageUrl
-            ]
-            span [ Class "title" ] [ str item.Title ]
-        ]
-    ]
 
-let view (model: Model) dispatch =
-    div [] [
-        match model.Items with
-        | [||] ->
-            button [ OnClick(fun _ -> dispatch LoadItems) ] [ str "Load items" ]
-            div [ Class "placeholder-message" ] [str "Press button to load more"]
-        | items ->
-            div [ Class "product-items-wrapper" ] (items |> Array.map itemView)
-            button [ OnClick(fun _ -> dispatch TogglePopup) ] [ str "info" ]
-            if model.Popup
-            then
-                div [ Class "details-wrapper" ] [
-                    str "click the product banner for extra details"
-                (*div [ Class "details-container" ] [
-                    span [ Class "product-description" ] [ str "Price"]
-                    span [ Class "product-description" ] [ str "Dimentions"]
-                    span [ Class "product-description" ] [ str "Items left"]
-                    span [ Class "product-description" ] [ str "Product code"]
-                    ]
-                ]*)
-          (*      div [ Class "details-wrapper" ] (items |> Array.map itemDetails)*)
-
-    ]
-    ]

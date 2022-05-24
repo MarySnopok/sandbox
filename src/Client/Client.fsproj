@@ -8,8 +8,8 @@
         <Compile Include="Components\Title.fs" />
         <None Include="index.html" />
         <None Include="paket.references" />
-
         <Compile Include="IndexF.fs" />
+        <Compile Include="View.fs" />
         <Compile Include="App.fs" />
     </ItemGroup>
     <ItemGroup>
